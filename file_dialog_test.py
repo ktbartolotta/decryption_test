@@ -121,25 +121,31 @@ class Application(Tkinter.Frame):
 
         source_group = Tkinter.Frame(self.target_picker_group)
         source_group.pack(fill=Tkinter.X)
-        Tkinter.Button(
-            source_group, text='source',
-            command=self.ask_source_directory).pack(
-                side=Tkinter.LEFT, padx=5, pady=5)
+        Tkinter.Label(
+            source_group, text='Target').pack(
+                side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
         Tkinter.Label(
             source_group, text='',
             textvariable=self.source_path, bg='white').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
+        Tkinter.Button(
+            source_group, text='Browse',
+            command=self.ask_source_directory).pack(
+                side=Tkinter.LEFT, padx=5, pady=5)
 
         target_group = Tkinter.Frame(self.target_picker_group)
         target_group.pack(fill=Tkinter.X)
-        Tkinter.Button(
-            target_group, text='target',
-            command=self.ask_target_directory).pack(
-                side=Tkinter.LEFT, padx=5, pady=5)
+        Tkinter.Label(
+            target_group, text='Target').pack(
+                side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
         Tkinter.Label(
             target_group, text='',
             textvariable=self.target_path, bg='white').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
+        Tkinter.Button(
+            target_group, text='Browse',
+            command=self.ask_target_directory).pack(
+                side=Tkinter.LEFT, padx=5, pady=5)
 
     def ask_target_directory(self):
 
