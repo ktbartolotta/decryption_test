@@ -122,7 +122,7 @@ class Application(Tkinter.Frame):
         source_group = Tkinter.Frame(self.target_picker_group)
         source_group.pack(fill=Tkinter.X)
         Tkinter.Label(
-            source_group, text='Target').pack(
+            source_group, text='Source').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
         Tkinter.Label(
             source_group, text='',
