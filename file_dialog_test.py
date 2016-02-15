@@ -85,8 +85,7 @@ class Application(Tkinter.Frame):
         source_group = Tkinter.Frame(self.target_picker_group)
         source_group.pack(fill=Tkinter.X)
         Tkinter.Label(
-            source_group, text='Source',
-            textvariable=self.source_path).pack(
+            source_group, text='Source').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
         Tkinter.Label(
             source_group, text='',
@@ -100,8 +99,7 @@ class Application(Tkinter.Frame):
         target_group = Tkinter.Frame(self.target_picker_group)
         target_group.pack(fill=Tkinter.X)
         Tkinter.Label(
-            target_group, text='Target',
-            textvariable=self.target_path).pack(
+            target_group, text='Target').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
         Tkinter.Label(
             target_group, text='',
