@@ -81,6 +81,7 @@ class Application(Tkinter.Frame):
         self.target_picker_group = Tkinter.LabelFrame(
             self.picker_container, text='Pick file')
         self.target_picker_group.pack(padx=5, pady=5, fill=Tkinter.X)
+
         source_group = Tkinter.Frame(self.target_picker_group)
         source_group.pack(fill=Tkinter.X)
         Tkinter.Button(
@@ -88,9 +89,10 @@ class Application(Tkinter.Frame):
             command=self.ask_source_filename).pack(
                 side=Tkinter.LEFT, padx=5, pady=5)
         Tkinter.Label(
-            source_group, text='stuff stuff stuff',
+            source_group, text='',
             textvariable=self.source_path, bg='white').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
+
         target_group = Tkinter.Frame(self.target_picker_group)
         target_group.pack(fill=Tkinter.X)
         Tkinter.Button(
@@ -98,7 +100,7 @@ class Application(Tkinter.Frame):
             command=self.ask_target_directory).pack(
                 side=Tkinter.LEFT, padx=5, pady=5)
         Tkinter.Label(
-            target_group, text='stuff stuff stuff',
+            target_group, text='',
             textvariable=self.target_path, bg='white').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
 
@@ -110,6 +112,7 @@ class Application(Tkinter.Frame):
         self.target_picker_group = Tkinter.LabelFrame(
             self.picker_container, text='Pick directory')
         self.target_picker_group.pack(padx=5, pady=5, fill=Tkinter.X)
+
         source_group = Tkinter.Frame(self.target_picker_group)
         source_group.pack(fill=Tkinter.X)
         Tkinter.Button(
@@ -117,9 +120,10 @@ class Application(Tkinter.Frame):
             command=self.ask_source_directory).pack(
                 side=Tkinter.LEFT, padx=5, pady=5)
         Tkinter.Label(
-            source_group, text='stuff stuff stuff',
+            source_group, text='',
             textvariable=self.source_path, bg='white').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
+
         target_group = Tkinter.Frame(self.target_picker_group)
         target_group.pack(fill=Tkinter.X)
         Tkinter.Button(
@@ -127,7 +131,7 @@ class Application(Tkinter.Frame):
             command=self.ask_target_directory).pack(
                 side=Tkinter.LEFT, padx=5, pady=5)
         Tkinter.Label(
-            target_group, text='stuff stuff stuff',
+            target_group, text='',
             textvariable=self.target_path, bg='white').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
 
