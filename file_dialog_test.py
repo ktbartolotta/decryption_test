@@ -87,10 +87,11 @@ class Application(Tkinter.Frame):
         Tkinter.Label(
             source_group, text='Source').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
-        Tkinter.Label(
+        Tkinter.Entry(
             source_group, text='',
             textvariable=self.source_path, bg='white').pack(
-                side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
+                side=Tkinter.LEFT, expand=Tkinter.YES,
+                fill=Tkinter.X, padx=5, pady=5)
         Tkinter.Button(
             source_group, text='Browse',
             command=self.ask_source_filename).pack(
@@ -101,10 +102,11 @@ class Application(Tkinter.Frame):
         Tkinter.Label(
             target_group, text='Target').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
-        Tkinter.Label(
+        Tkinter.Entry(
             target_group, text='',
             textvariable=self.target_path, bg='white').pack(
-                side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
+                side=Tkinter.LEFT, expand=Tkinter.YES,
+                fill=Tkinter.X, padx=5, pady=5)
         Tkinter.Button(
             target_group, text='Browse',
             command=self.ask_target_directory).pack(
@@ -124,10 +126,11 @@ class Application(Tkinter.Frame):
         Tkinter.Label(
             source_group, text='Source').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
-        Tkinter.Label(
+        Tkinter.Entry(
             source_group, text='',
             textvariable=self.source_path, bg='white').pack(
-                side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
+                side=Tkinter.LEFT, expand=Tkinter.YES,
+                fill=Tkinter.X, padx=5, pady=5)
         Tkinter.Button(
             source_group, text='Browse',
             command=self.ask_source_directory).pack(
@@ -138,10 +141,11 @@ class Application(Tkinter.Frame):
         Tkinter.Label(
             target_group, text='Target').pack(
                 side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
-        Tkinter.Label(
+        Tkinter.Entry(
             target_group, text='',
             textvariable=self.target_path, bg='white').pack(
-                side=Tkinter.LEFT, fill=Tkinter.X, padx=5, pady=5)
+                side=Tkinter.LEFT, expand=Tkinter.YES,
+                fill=Tkinter.X, padx=5, pady=5)
         Tkinter.Button(
             target_group, text='Browse',
             command=self.ask_target_directory).pack(
@@ -225,5 +229,7 @@ class Application(Tkinter.Frame):
 if __name__ == '__main__':
 
     root = Tkinter.Tk()
-    Application(root).pack()
+    root.title('Cryptographic Utility')
+    root.geometry('700x300')
+    Application(root).pack(fill=Tkinter.BOTH)
     root.mainloop()
