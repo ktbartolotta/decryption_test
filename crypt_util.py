@@ -2,9 +2,16 @@ import os
 import hashlib
 import argparse
 import getpass
+import logging
 
 from Crypto.Cipher import AES
 from Crypto import Random
+
+
+logging.basicConfig(
+    filename='status.log',
+    format='%(asctime)s %(message)s',
+    level=logging.INFO)
 
 
 def pad(data_str):
@@ -26,7 +33,7 @@ def decrypt_message(msg, pwd):
         enc_obj = AES.new(dk, AES.MODE_CBC, iv)
         return unpad(enc_obj.decrypt(msg[32:]))
     except Exception, e:
-        print(e)
+        logging.error(e)
 
 
 def decrypt_file(in_file_path, out_file_path, pwd):
@@ -60,7 +67,7 @@ def decrypt_file(in_file_path, out_file_path, pwd):
                             output.write(unpad(content))
                             break
     except Exception, e:
-        print(in_file_path, e)
+        logging.error('%s %s' % (os.path.abspath(in_file_path), e))
 
 
 def decrypt_directory(in_dir_path, out_dir_path, pwd):
@@ -91,7 +98,7 @@ def encrypt_message(msg, pwd):
         enc_obj = AES.new(dk, AES.MODE_CBC, iv)
         return salt + iv + enc_obj.encrypt(pad(msg))
     except Exception, e:
-        print(e)
+        logging.error(e)
 
 
 def encrypt_file(in_file_path, out_file_path, pwd):
@@ -102,7 +109,7 @@ def encrypt_file(in_file_path, out_file_path, pwd):
                 output.write(
                     encrypt_message(input.read(), pwd))
     except Exception, e:
-        print(in_file_path, e)
+        logging.error('%s %s' % (os.path.abspath(in_file_path), e))
 
 
 def encrypt_directory(in_dir_path, out_dir_path, pwd):
@@ -152,20 +159,24 @@ if __name__ == '__main__':
 
     try:
         if args.encrypt:
+            logging.info('Begin encryption.')
             if args.file:
                 encrypt_file(args.file[0], args.file[1], password)
             elif args.dir:
                 encrypt_directory(args.dir[0], args.dir[1], password)
             else:
-                print('You for got to indicate file or directory.')
+                logging.warning('You for got to indicate file or directory.')
+            logging.info('End encryption.')
         elif args.decrypt:
+            logging.info('Begin decryption.')
             if args.file:
                 decrypt_file(args.file[0], args.file[1], password)
             elif args.dir:
                 decrypt_directory(args.dir[0], args.dir[1], password)
             else:
-                print('You forgot to indicate file or directory.')
+                logging.warning('You forgot to indicate file or directory.')
+            logging.info('End decryption.')
         else:
-            print('Decrypt or encrypt')
+            logging.warning('Decrypt or encrypt?')
     except Exception, e:
-        print(e)
+        logging.error(e)
