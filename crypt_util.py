@@ -24,18 +24,6 @@ def unpad(data_str):
     return data_str[0:-ord(data_str[-1])]
 
 
-def decrypt_message(msg, pwd):
-
-    try:
-        iv = msg[16:32]
-        salt = msg[:16]
-        dk = hashlib.pbkdf2_hmac('sha1', pwd, salt, 65536, 16)
-        enc_obj = AES.new(dk, AES.MODE_CBC, iv)
-        return unpad(enc_obj.decrypt(msg[32:]))
-    except Exception, e:
-        logging.error(e)
-
-
 def decrypt_file(in_file_path, out_file_path, pwd):
 
     try:
@@ -89,25 +77,32 @@ def decrypt_directory(in_dir_path, out_dir_path, pwd):
         raise e
 
 
-def encrypt_message(msg, pwd):
-
-    try:
-        iv = Random.new().read(AES.block_size)
-        salt = Random.new().read(AES.block_size)
-        dk = hashlib.pbkdf2_hmac('sha1', pwd, salt, 65536, 16)
-        enc_obj = AES.new(dk, AES.MODE_CBC, iv)
-        return salt + iv + enc_obj.encrypt(pad(msg))
-    except Exception, e:
-        logging.error(e)
-
-
 def encrypt_file(in_file_path, out_file_path, pwd):
 
     try:
         with open(in_file_path, 'rb') as input:
             with open(out_file_path, 'wb') as output:
-                output.write(
-                    encrypt_message(input.read(), pwd))
+                salt = Random.new().read(AES.block_size)
+                iv = Random.new().read(AES.block_size)
+                key = hashlib.pbkdf2_hmac('sha1', pwd, salt, 65536, 16)
+                enc_obj = AES.new(key, AES.MODE_CBC, iv)
+                block1 = input.read(16)
+                if len(block1) < AES.block_size:
+                    output.write(salt + iv + enc_obj.encrypt(pad(block1)))
+                else:
+                    content = enc_obj.encrypt(block1)
+                    output.write(salt + iv + content)
+                    while True:
+                        iv = content
+                        block1 = input.read(16)
+                        enc_obj = AES.new(key, AES.MODE_CBC, iv)
+                        if len(block1) < AES.block_size:
+                            output.write(enc_obj.encrypt(pad(block1)))
+                            break
+                        else:
+                            content = enc_obj.encrypt(block1)
+                            output.write(content)
+
     except Exception, e:
         logging.error('%s %s' % (os.path.abspath(in_file_path), e))
 
